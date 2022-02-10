@@ -1,15 +1,10 @@
-import LoadPersons from './LoadPersons';
+import {loadUser} from './loadUserActions.js';
+import debounce from './debounce.js';
 
-class MyApp {
-  constructor() {
-    this.h1 = document.createElement('h1');
-  }
-
-  init() {
-    this.h1.innerHTML = 'TEST';
-    document.body.appendChild(this.h1);
-    LoadPersons.loadAllPersons();
-  }
+function myApp() {
+    const onChangeUser = (e) => loadUser(e.target.value);
+    const onChangeUserDebounce = debounce(onChangeUser, 1300);
+    document.querySelector('.search__input').addEventListener('keyup', onChangeUserDebounce);
 }
 
-export default new MyApp();
+export default myApp;
