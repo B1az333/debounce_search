@@ -1,101 +1,70 @@
-import {loadUser, loadUserRepositories, loadUserFollowers, clearUser} from '../../loadUserActions.js';
+import {loadUser, loadUserRepositories, loadUserFollowers } from '../../loadUserActions.js';
 import request from '../../request.js';
 import updateUser from '../../updateUser.js';
+import clearUser from '../../clearUser.js';
 
 jest.mock('../../request.js', () => jest.fn());
 jest.mock('../../updateUser.js', () => jest.fn());
+jest.mock('../../clearUser.js', () => jest.fn());
 
-jest.mock('../../updateUser.js');
-// jest.mock('../../loadUserActions.js', () => ({
-//     clearUser: jest.fn()
-// }));
 
 describe('loadUserActions', () => {
-    // beforeEach(() => {    
-    //     jest.clearAllMocks();
-    //   });
+    const name = 'marina57678';
 
-    describe('Checking function "loadUser"', () => {
-        const userBlock = document.createElement('div');
-        userBlock.innerHTML = 'Some text';
+    describe('loadUser', () => {
+        const user = {};
 
-        document.querySelector = jest.fn(() => userBlock);
+        beforeEach(() => {
+            jest.clearAllMocks();
+            request.mockReturnValue(user);
+        })
 
-        const result = clearUser();
+        test('Should be call clearUser: ', async () => {
+            const emptyName = '';
+            const result = await loadUser(emptyName);
 
-        test('Should be return undefined: ', () => {
             expect(result).toBeUndefined();
+            expect(clearUser).toHaveBeenCalledTimes(1);
         });
 
-        test('Should be called "querySelector" with parameter ".user": ', () => {
-            expect(document.querySelector).toHaveBeenNthCalledWith(1, '.user');
-            expect(document.querySelector).toHaveBeenCalledTimes(1);
-        });
-
-        test('Should clear the contents of the block: ', () => {
-            expect(userBlock.innerHTML).toBe('');
-        });
-    })
-
-    describe('Checking function "loadUserRepositories"', () => {
-        const array = []; 
-        const name = 'Example';
-        const requestParametr = { path: `/users/${name}/repos` };
-
-        request.mockReturnValueOnce(array);
-
-        test('Should be return array: ', async () => {
-            const result = await loadUserRepositories(name);
-            expect(result).toBe(array);
-        });
-
-        test('Should be done request with parameter: ', () => {
-            expect(request).toHaveBeenNthCalledWith(1, requestParametr);
+        test('Should be tаке request and call updateUser: ', async () => {
+            const reqParam = { path: `/users/${name}` };
+            const result = await loadUser('marina57678');
+            
+            expect(result).toBeUndefined();
+            
+            expect(request).toHaveBeenNthCalledWith(1, reqParam);
             expect(request).toHaveBeenCalledTimes(1);
-         });
+
+            expect(updateUser).toHaveBeenNthCalledWith(1, user);
+            expect(updateUser).toHaveBeenCalledTimes(1);
+        });
     })
 
-    // describe('Checking function "loadUserRepositories"', () => {
-    //     const array = []; 
-    //     const name = 'Example';
-    //     const requestParametr = { path: `/users/${name}/repos` };
-
-    //     request.mockReturnValueOnce(array);
-
-    //     test('Should be return array: ', async () => {
-    //         const result = await loadUserRepositories(name);
-    //         expect(result).toBe(array);
-    //     });
-
-    //     test('Should be done request with parameter: ', () => {
-    //         expect(request).toHaveBeenNthCalledWith(1, requestParametr);
-    //         expect(request).toHaveBeenCalledTimes(1);
-    //      });
-    // })
-
-    // describe('Checking function "loadUserFollowers"', () => {
-    //     jest.resetAllMocks();
-
-    //     const array = []; 
-    //     const name = 'Example';
-    //     const requestParametr = { path: `/users/${name}/followers` };
-
-    //     request.mockReturnValueOnce(array);
-
-    //     test('Should be return array: ', async () => {
-    //         const result = await loadUserFollowers(name);
-    //         expect(result).toBe(array);
-    //     });
-
-    //     test('Should be done request with parameter: ', () => {
-    //         // expect(request).toHaveBeenNthCalledWith(1, requestParametr);
-    //         expect(request).toHaveBeenCalledTimes(1);
-    //      });
-    // })
-
-    describe('Checking function "clearUser"', () => {
+    describe('loadUserRepositories & loadUserFollowers', () => {
+        const array = []; 
         
+        beforeEach(() => {
+            jest.clearAllMocks();
+            request.mockReturnValue(array);
+        })
+
+        test('loadUserRepositories should be return array: ', async () => {
+            const reqParam = { path: `/users/${name}/repos` };
+            const result = await loadUserRepositories(name);
+
+            expect(result).toBe(array);
+            expect(request).toHaveBeenNthCalledWith(1, reqParam);
+            expect(request).toHaveBeenCalledTimes(1);
+        });
+
+        test('loadUserFollowers should be return array: ', async () => {
+            const reqParam = { path: `/users/${name}/followers` };
+            const result = await loadUserFollowers(name);
+
+            expect(result).toBe(array);
+            expect(request).toHaveBeenNthCalledWith(1, reqParam);
+            expect(request).toHaveBeenCalledTimes(1);
+        });   
     })
 })
-
-

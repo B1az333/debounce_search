@@ -1,5 +1,6 @@
 import request from './request.js';
 import updateUser from './updateUser.js';
+import clearUser from './clearUser.js'
 
 async function loadUser(name) {
     if (name === '') {
@@ -21,9 +22,4 @@ async function loadUserFollowers(name) {
     return followers;
 }
 
-function clearUser() {
-    const user = document.querySelector('.user');
-    user.innerHTML = '';
-}
-
-export { loadUser, loadUserRepositories, loadUserFollowers, clearUser};
+export { loadUser, loadUserRepositories, loadUserFollowers };
