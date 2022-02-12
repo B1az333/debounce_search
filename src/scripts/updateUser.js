@@ -12,8 +12,11 @@ async function updateUser(user) {
         return;
     }
 
-    const repositories = await loadUserRepositories(user.login);
-    const followers = await loadUserFollowers(user.login);
+    const [repositories, followers ] = await Promise.all([
+        loadUserRepositories(user.login),
+        loadUserFollowers(user.login)
+    ])
+
     const userInfo = {
         name: user?.login,
         photo: user?.avatar_url,

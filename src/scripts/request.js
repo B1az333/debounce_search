@@ -12,15 +12,14 @@ async function request({ method = 'GET', path }) {
 
     try{
         const response = await fetch(url, options);
+        const result = await response.json();
 
         if(response.ok) {
-            const res = await response.json();
-            return res;
+            return result;
         }
         else {
-            const error = await response.json();
-            error.status = response.status;
-            return error;
+            result.status = response.status;
+            return result;
         }
     }
     catch{

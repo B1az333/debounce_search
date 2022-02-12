@@ -26,4 +26,4 @@ function clearUser() {
     user.innerHTML = '';
 }
 
-export { loadUser, loadUserRepositories, loadUserFollowers, clearUser };
+export { loadUser, loadUserRepositories, loadUserFollowers, clearUser};

@@ -1,10 +1,10 @@
-import img from './../assets/images/crystal-ball.png';
+import imgCrystalBall from '../assets/images/crystal-ball.png';
 
 function createErrorBlock(status) {
     return `
     <div class="user">
       <figure class="user__image">
-        <img src="${img}" alt="img">
+        <img src="${imgCrystalBall}" alt="img">
         <figcaption class="user__name">🔮${status}🔮</figcaption>
       </figure>
     </div>
