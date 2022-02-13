@@ -3,12 +3,11 @@ import imgCrystalBall from '../assets/images/crystal-ball.png';
 function createErrorBlock(status) {
     return `
     <div class="user">
-      <figure class="user__image">
-        <img src="${imgCrystalBall}" alt="img">
-        <figcaption class="user__name">🔮${status}🔮</figcaption>
-      </figure>
-    </div>
-    `;
+        <figure class="user__image">
+            <img src="${imgCrystalBall}" alt="img">
+            <figcaption class="user__name">🔮${status}🔮</figcaption>
+        </figure>
+    </div>`;
 }
 
 function createUserBlock({ name, photo, repositories, followers }) {
@@ -16,16 +15,14 @@ function createUserBlock({ name, photo, repositories, followers }) {
     const followersBlock = createFollowersBlock(followers);
 
     return `
-  <div class="user">
-    <figure class="user__image">
-      <img src="${photo}
-      }" alt="img">
-      <figcaption class="user__name">${name}</figcaption>
-    </figure>
-    ${repositoriesBlock}
-    ${followersBlock}
-  </div>
-  `;
+    <div class="user">
+        <figure class="user__image"><img src="${photo}}" alt="img">
+        <figcaption class="user__name">${name}</figcaption>
+        </figure>
+        ${repositoriesBlock}
+        ${followersBlock}
+    </div>
+    `;
 }
 
 function createRepositoriesBlock(repositories) {
@@ -39,10 +36,10 @@ function createRepositoriesBlock(repositories) {
 
     return `
     <div class="user__repos">
-      <div class="title title__repo">Repositories (${repositories.length})</div>
-      <div class="user__link-container">
-        ${repositoriesBlock}
-      </div>
+        <div class="title title__repo">Repositories (${repositories.length})</div>
+        <div class="user__link-container">
+            ${repositoriesBlock}
+        </div>
     </div>
     `;
 }
@@ -58,12 +55,12 @@ function createFollowersBlock(followers) {
 
     return `
     <div class="user__link">
-      <div class="title title__folowers">Followers (${followers.length})</div>
-      <div class="user__link-container">
-        ${followersBlock}
-      </div>
+        <div class="title title__folowers">Followers (${followers.length})</div>
+        <div class="user__link-container">
+            ${followersBlock}
+        </div>
     </div>
-  `;
+    `;
 }
 
 export { createErrorBlock, createUserBlock, createRepositoriesBlock, createFollowersBlock };

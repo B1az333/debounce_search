@@ -15,7 +15,7 @@ describe('myApp', () => {
     test('myApp should be call need functions: ', () => {
         const result = myApp();
 
-        let event = new Event('keyup');
+        const event = new Event('keyup');
         div.dispatchEvent(event)
 
         expect(result).toBeUndefined();

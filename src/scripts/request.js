@@ -14,16 +14,13 @@ async function request({ method = 'GET', path }) {
         const response = await fetch(url, options);
         const result = await response.json();
 
-        if(response.ok) {
-            return result;
-        }
-        else {
-            result.status = response.status;
-            return result;
-        }
+        if (!response.ok) result.status = response.status;
+
+        return result;
     }
     catch{
         throw new Error('Invalid API');
+        // console.log(333);
     }
 }
 

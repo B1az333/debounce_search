@@ -3,7 +3,7 @@ import { loadUserRepositories, loadUserFollowers} from './loadUserActions.js'
 
 async function updateUser(user) {
     const oldUserBlock = document.querySelector('.user');
-    const parentUserBlock = document.querySelector('.user').parentElement;
+    const parentUserBlock = oldUserBlock.parentElement;
     oldUserBlock.remove();
 
     if(user.message) {
