@@ -1,5 +1,7 @@
 # Github user search
 Made a small search engine for a specific user using the delay mechanism - debounce
+
+And also fully tested by unit tests 
 ## To launch this project
 ```
 npm install // load all packages
